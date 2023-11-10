@@ -17,14 +17,13 @@ export interface IPost {
 }
 
 export function Home() {
-  const [textSearch, setTextSearch] = useState('')
   const [posts, setPosts] = useState<IPost[]>([] as IPost[])
   const [postsCounter, setPostsCounter] = useState(0)
 
   const fetchPosts = useCallback(async (query: string | null) => {
-    // https://api.github.com/search/issues?q=is:issue%20is:open%20repo:vilmarsitiodigital/github-blog
+    console.log('query', query)
     const response = await api.get(
-      `search/issues?q=${query}is:issue%20is:open%20repo:germanoricardi/github-blog`,
+      `search/issues?q=repo:germanoricardi/desafios-rocketseat-coffee-delivery/issues?q=is%3Aopen+${query}`,
     )
 
     setPosts(response.data.items)
